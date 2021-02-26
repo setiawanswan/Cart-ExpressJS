@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/regist.css">
+    <title>Halaman Regist</title>
+</head>
+<body>
+    <div class="form-regist">
+        <p class="title-regist">Form Register</p>
+        <form>
+            <input class="input-regist" type="text" id="lname" name="lname" placeholder="Nama Lengkap"> <br> <br>
+            <input class="input-regist" type="text" id="lname" name="lname" placeholder="Alamat Email"> <br> <br>
+            <input class="input-regist" type="text" id="lname" name="lname" placeholder="Nomor Telephone"> <br> <br>
+            <input class="input-regist" type="password" id="lname" name="lname" placeholder="Password"> <br> <br>
+            <button id="submit" class="input-submit" type="submit" value="Submit"> Submit</button>
+        </form>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        // $('button').click(function(){
+        $.ajax({
+            url: 'http://localhost:3000/register',
+            type: 'post',
+            // dataType: 'json',
+            data: {
+                // id: "11",
+                nama: "saep",
+                email: "saep@wiwin.com",
+                nomor: 62955,
+                password: 123,
+                // updatedAt: "2021-02-26T13:45:29.097Z",
+                // createdAt: "2021-02-26T13:45:29.097Z"
+            },
+            success: function(result){
+                console.log(result)
+            }
+        })
+    // })
+    })
+</script>
+</html>

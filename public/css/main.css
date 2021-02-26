@@ -1,0 +1,140 @@
+body {
+    background-color: white;
+}
+
+.topnav {
+    overflow: hidden;
+    /* background-color: #494949; */
+    background-color: #E5E5E5;
+}
+
+.topnav a {
+    float: right;
+    color: #505050;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+/* button{
+    width: 100%;
+} */
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    /* width: 100%; */
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-shopping{
+    padding: 4%;
+}
+
+.total-list{
+    padding: 4%;
+}
+
+.section-left{
+    padding: 6%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.total{
+    border-top: 1px solid #E5E5E5;
+}
+
+.gambar-produk{
+    width: 100%;
+}
+
+.quantity-action{
+    display: flex;
+}
+
+.border-product{
+    border-top: 1px solid #E5E5E5;
+    margin-bottom: 8%;
+}
+
+.btn-hapus{
+    font-family: sans-serif;
+    padding: 4%;
+    font-size: 16px;
+    border: none;
+    border-radius: 10%;
+}
+
+.btn-quantity{
+    font-family: sans-serif;
+    padding: 2%;
+    font-size: 10px;
+    border: none;
+    border-radius: 10%;
+}
+
+.list-number{
+    width: 85%;
+}
+
+.btn-add{
+    font-family: sans-serif;
+    padding: 10%;
+    font-size: 16px;
+    border: none;
+    border-radius: 10%;
+}
+
+@media only screen and (max-width: 785px) {
+    .flex-container {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 555px) {
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    p{
+        font-size: 14px;
+    }
+    .topnav a {
+        font-size: 14px;
+    }
+
+    .btn-add{
+        font-size: 12px;
+    }
+
+    .btn-hapus {
+        font-size: 12px;
+        padding: 2%;
+    }
+}

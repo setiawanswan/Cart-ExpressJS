@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/regist.css">
+    <title>Halaman Login</title>
+</head>
+<body>
+    <div class="form-regist">
+        <p class="title-regist">Login</p>
+        <!-- <form> -->
+            <input class="input-regist" type="text" id="email" placeholder="Alamat Email"> <br> <br>
+            <input class="input-regist" type="password" id="password" placeholder="Password"> <br> <br>
+            <button class="input-submit"> Login </button>
+            <p class="perintah-regist"><a class="sign-up" href="/regist"> Sign Up</a></p>
+        <!-- </form> -->
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('.input-submit').click(function(){
+            // console.log("Helo")
+            var email = $('#email').val()
+            var password = $('#password').val()
+            console.log(email)
+            console.log(password)
+            $.ajax({
+                url: 'http://localhost:3000/logins',
+                type: 'get',
+                dataType: 'json',
+                success: function(result)
+                {
+                    console.log(result)
+                    $.each(result, function(i){
+                        if(result[i].email == email && result[i].password == password){
+                            window.location.replace("http://localhost:3000")
+                        } else {
+                            alert("Login Gagal")
+                        }
+                    })
+                }
+            })
+        })
+    })
+</script>
+</html>

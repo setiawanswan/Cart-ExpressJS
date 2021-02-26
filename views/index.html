@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Shop</title>
+</head>
+<body>
+    <div>
+        <div class="topnav">
+            <a href="login">Login</a>
+            <a href="regist">Register</a>
+        </div>
+    </div>
+    <div class="flex-container">
+        <div id="list-barang" class="list-shopping">
+            
+        </div>
+        <div class="total-list">
+            <div id="hasil-barang" class="daftar-belanja">
+                <p class="subtitle-belanja">Shopping List</p>
+            </div>
+            <div class="total">
+                <p id="hasil" class="title-total">Total</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script >
+    var total = 0 
+    var totalProduk = 0
+    var totalHarga = 0
+    $(document).ready(function(){
+        $.ajax({
+            url: 'http://localhost:3000/todos',
+            type: 'get',
+            dataType: 'json',
+            success: function(result)
+            {
+                console.log(result[0].kode_sku)
+                // document.getElementById('list-barang').innerHTML += '<p> '+result[0].kode_sku+' </p>'
+                $.each(result, function(i) {
+                    document.getElementById('list-barang').innerHTML += 
+                    '<table class="center">'+
+                        '<tr>'+
+                            '<th></th>' +
+                            '<th>PRODUCT</th>' +
+                            '<th>PRICE</th>' +
+                            '<th>QUANTITY</th>' +
+                            '<th>ACTION</th>' +
+                        '</tr>'+
+                        '<tr>'+
+                            '<td><img class="gambar-produk" src="img/obat.jpg" alt=""> </td>' +
+                            '<td> '+result[i].nama_barang+'</td>' +
+                            '<td> Rp  '+result[i].harga_satuan+' </td>' +
+                            '<td>'  + 
+                                '<div class="quantity-action">' +
+                                    '<button onclick="tambahProduk()" class="btn-quantity" >+</button>' +
+                                        '<input id="quantity" type="number" value="'+totalProduk+'" class="list-number"> </input>' +
+                                    '<button onclick="kurangProduk()" class="btn-quantity">-</button>' +
+                                '<div>'+
+                            '</td>' +
+                            '<td> <button onclick="myFunction('+result[i].id+')" class="btn-add"> Add </button> </td>' +
+                        '<tr>'+
+                    '</table>' 
+                        // '<div class="section-left">' +
+                        //     '<div class="grid-container">'+
+                        //         '<div>' +
+                        //             '<img class="gambar-produk" src="img/obat.jpg" alt="">' +
+                        //         '</div>'+
+                        //         '<div>' +
+                        //             '<p> Kode Barang : '+result[i].kode_sku+' </p>'+
+                        //             '<p class="nama-barang"> '+result[i].nama_barang+' </p>'+
+                        //             '<p> '+result[i].foto_barang+' </p>'+
+                        //             'div' + 
+                        //                 '<button class="produk-tambah" onclick="tambahProduk()">+</button>' +
+                        //                 '<input id="quantity" type="number" value="'+totalProduk+'"> </input>' +
+                        //                 '<button>-</button>' +
+                        //             '</div>'+
+                        //             '<p> Rp '+result[i].harga_satuan+' </p>'+ 
+                        //         '</div>' +
+                        //         '<div>' +
+                        //             '<p> <button onclick="myFunction('+result[i].id+')"> Add </button> </p>'+
+                        //         '</div>' +
+                        //     '<div>' +
+                        // '</div>'
+                        console.log(result[i].harga_satuan)
+                })
+            }
+        });
+    })
+    function myFunction(tombol){
+        // console.log(tombol)
+        $.ajax({
+            url: 'http://localhost:3000/todos',
+            type: 'get',
+            dataType: 'json',
+            success: function(result)
+            {
+                $.each(result, function(i) 
+                { if(result[i].id == tombol){
+                    document.getElementById('hasil-barang').innerHTML +=
+                    '<div id="nambah-barang" class="border-product">' +
+                        // '<p> '+result[i].kode_sku+'</p>' +
+                        '<p > Product : '+result[i].nama_barang+'</p>' +
+                        // '<p> '+result[i].foto_barang+'</p>' +
+                        '<p> Quantity : '+result[i].qty+'</p>' +
+                        '<p> Price : '+result[i].harga_satuan+'</p>' +
+                        '<button onclick="hapusList('+result[i].id+')" class="btn-hapus"> Delete </button>'
+                    '</div>',
+                    total = total + result[i].harga_satuan
+                    // console.log(total)
+                    var totalBelanja = document.getElementById('hasil')
+                    // var text = document.createTextNode(total)
+                    totalBelanja.innerHTML = 'Total :' + totalHarga 
+                }
+                })
+            }
+        })
+    }
+    function hapusList(hapus){
+        document.getElementById('nambah-barang').remove()
+        // total = total - result()
+
+        $.ajax({
+            url: 'http://localhost:3000/todos/',
+            type: 'get',
+            dataType: 'json',
+            success: function(result)
+            {
+                $.each(result, function(i) {
+                    if(result[i].id == hapus){
+                        document.getElementById('')
+                        total = total - result[i].harga_satuan
+                        var totalBelanja = document.getElementById('hasil')
+                        totalBelanja.innerHTML = 'Total :' + total
+                        console.log(total)
+                    }
+                })
+            }
+        })
+    }
+    function tambahProduk(tambah){
+        // console.log("hai")
+        totalProduk = totalProduk + 1
+        document.getElementById('quantity').value = totalProduk
+        var addproduk = $('#quantity').val()
+        totalHarga = totalProduk * total
+        console.log(totalHarga) 
+    }
+    
+    function kurangProduk(kurang){
+        totalProduk = totalProduk - 1
+        document.getElementById('quantity').value = totalProduk
+        var addproduk = $('#quantity').val()
+        totalHarga = totalProduk * total
+        console.log(totalHarga)
+    }
+    
+</script>
+</html>
